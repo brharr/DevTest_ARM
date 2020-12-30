@@ -1,0 +1,184 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "labName": { "type": "string" },
+        "labGitHubRepoName": { "type": "string" },
+        "labGitHubRepo": { 
+            "type": "string",
+            "metadata": { "description": "This required value needs to be a full Repo Cloning URL, i.e.: https://github.com/Azure/azure-quickstart-templates.git"}
+        },
+        "labGitHubToken": { "type": "string" },
+        "shared-vnet": { "type": "string" },
+        "shared-vnet-subnet": { "type": "string" },
+        "vmShutdownTime": { "type": "string" },
+        "vmShutdownTimeZoneId": { "type": "string" },
+        "maxAllowedVmsPerUser": { "type": "int" },
+        "maxAllowedVmsPerLab": { "type": "int" },
+        "allowedVmSizes": { 
+            "type": "string",
+            "defaultValue": "\"Standard_A5\", \"Standard_A3\", \"Standard_A2\"",
+            "minLength": 3,
+            "metadata": {
+                "description": "A comma-separated list of VM sizes that are allowed in the lab."
+            } 
+        }
+    },
+    "variables": {
+        "sharedSubnetId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('shared-vnet')), '/subnets/', parameters('shared-vnet-subnet'))]",
+        "allowedImages": "\"{\\\"offer\\\":\\\"CentOS\\\",\\\"publisher\\\":\\\"OpenLogic\\\",\\\"sku\\\":\\\"7.2\\\",\\\"osType\\\":\\\"Linux\\\",\\\"version\\\":\\\"latest\\\"}\",\"{\\\"offer\\\":\\\"Oracle-Linux\\\",\\\"publisher\\\":\\\"Oracle\\\",\\\"sku\\\":\\\"7.2\\\",\\\"osType\\\":\\\"Linux\\\",\\\"version\\\":\\\"latest\\\"}\",\"{\\\"offer\\\":\\\"SQL2016-WS2012R2\\\",\\\"publisher\\\":\\\"MicrosoftSQLServer\\\",\\\"sku\\\":\\\"Enterprise\\\",\\\"osType\\\":\\\"Windows\\\",\\\"version\\\":\\\"latest\\\"}\""
+    },
+    "resources": [
+        {
+            "name": "[parameters('labName')]",
+            "type": "Microsoft.DevTestLab/labs",
+            "apiVersion": "2018-09-15",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "properties": {
+                "labStorageType": "StandardSSD",
+                "premiumDataDisks": "Disabled",
+                "environmentPermission": "Reader",
+                "announcement": {
+                    "title": "",
+                    "markdown": "",
+                    "enabled": "Disabled",
+                    "expirationDate": "2020-01-15T22:00:00.213245Z",
+                    "expired": false
+                },
+                "support": {
+                    "enabled": "Disabled",
+                    "markdown": "string"
+                },
+                "extendedProperties": {}
+            },
+            "resources": 
+            [
+                {
+                    "name": "[parameters('shared-vnet')]",
+                    "type": "virtualnetworks",
+                    "apiVersion": "2018-09-15",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "tags": {},
+                    "properties": {
+                        "allowedSubnets": [
+                            {
+                                "resourceId": "[variables('sharedSubnetId')]",
+                                "labSubnetName": "sharedDBSubnet",
+                                "allowPublicIp": "Deny"
+                            }
+                        ],
+                        "description": "Virtual network created to provide shared resources for all developers, such as DBs",
+                        "externalProviderResourceId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('shared-vnet'))]"
+                        /*"subnetOverrides": [
+                            {
+                                "resourceId": "[variables('sharedSubnetId')]",
+                                "labSubnetName": "sharedDBSubnet",
+                                "useInVmCreationPermission": "string",
+                                "usePublicIpAddressPermission": "string",
+                                "sharedPublicIpAddressConfiguration": {
+                                "allowedPorts": [
+                                    {
+                                        "transportProtocol": "string",
+                                        "backendPort": "integer"
+                                    }
+                                ]
+                                },
+                                "virtualNetworkPoolName": "string"
+                            }
+                        ]*/
+                    }
+                },
+                {
+                    "name": "[parameters('labGitHubRepoName')]",
+                    "type": "artifactsources",
+                    "apiVersion": "2018-09-15",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "tags": {},
+                    "properties": {
+                        "displayName": "Quickstart_Templates",
+                        "uri": "[parameters('labGitHubRepo')]",
+                        "sourceType": "GitHub",
+                        "armTemplateFolderPath": "/201-web-app-sql-database",
+                        "securityToken": "[parameters('labGitHubToken')]",
+                        "status": "Enabled"
+                    }
+                },
+                {
+                    "apiVersion": "2018-09-15",
+                    "name": "default/GalleryImage",
+                    "type": "policySets/policies",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "properties": {
+                        "description": "",
+                        "factName": "GalleryImage",
+                        "evaluatorType": "AllowedValuesPolicy",
+                        "status": "Enabled",
+                        "threshold": "[concat('[', trim(variables('allowedImages')), ']')]"
+                    }
+                },
+                {
+                    "name": "LabVmsShutdown",
+                    "type": "schedules",
+                    "apiVersion": "2018-09-15",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "tags": {},
+                    "properties": {
+                        "status": "Enabled",
+                        "taskType": "LabVmsShutdownTask",
+                        /*"weeklyRecurrence": {
+                            "weekdays": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ],
+                            "time": "22:00"
+                        },*/
+                        "dailyRecurrence": { "time": "[parameters('vmShutdownTime')]" },
+                        "timeZoneId": "[parameters('vmShutdownTimeZoneId')]"
+                    }
+                },
+                {
+                    "apiVersion": "2018-09-15",
+                    "name": "default/MaxVmsAllowedPerUser",
+                    "type": "policySets/policies",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "properties": {
+                        "description": "",
+                        "factName": "UserOwnedLabVmCount",
+                        "threshold": "[parameters('maxAllowedVmsPerUser')]",
+                        "evaluatorType": "MaxValuePolicy",
+                        "status": "Enabled"
+                    }
+                },
+                {
+                    "apiVersion": "2018-09-15",
+                    "name": "default/MaxVmsAllowedPerLab",
+                    "type": "policySets/policies",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "properties": {
+                        "description": "",
+                        "factName": "LabVmCount",
+                        "threshold": "[parameters('maxAllowedVmsPerLab')]",
+                        "evaluatorType": "MaxValuePolicy",
+                        "status": "enabled"
+                    }
+                },
+                {
+                    "apiVersion": "2018-09-15",
+                    "name": "default/AllowedVmSizesInLab",
+                    "type": "policySets/policies",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "properties": {
+                        "description": "",
+                        "factName": "LabVmSize",
+                        "threshold": "[concat('[', trim(parameters('allowedVmSizes')), ']')]",
+                        "evaluatorType": "AllowedValuesPolicy",
+                        "status": "enabled"
+                    }
+                }
+            ]
+        }
+    ],
+    "outputs": {
+    }
+  }

@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "labName": { 
+            "value": "devTestLab" 
+        },
+        "labGitHubRepoName": {
+            "value": "devTestLabGitHub"
+        },
+        "labGitHubRepo": {
+            "value": "https://github.com/Azure/azure-quickstart-templates.git"
+        },
+        "labGitHubToken": {
+            "value": "835bb25d79eff187e7a08f48e0631c2b29a166a6"
+        },
+        "shared-vnet": {
+            "value": "vnet-devtest-shated"
+        },
+        "shared-vnet-subnet": {
+            "value": "db-subnet"
+        },
+        "vmShutdownTime": {
+            "value": "22:00" 
+        },
+        "vmShutdownTimeZoneId": {
+            "value": "Eastern Standard Time"
+        },
+        "maxAllowedVmsPerUser": {
+            "value": 2
+        },
+        "maxAllowedVmsPerLab": {
+            "value": 10
+        },
+        "allowedVmSizes": {
+            "value": "\"Standard_A2\", \"Standard_A4\""
+        }
+    }
+}

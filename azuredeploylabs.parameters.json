@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "labaccount_name": {
+            "value": "cfa-labaccount"
+        },
+        "lab_name": {
+            "value": "cyberrange"
+        },
+        "student_num": {
+            "value": 1
+        },
+        "image_name": {
+            "value": "data science virtual machine - windows server 2019"
+        },
+        "labs_ml_lab_bae2f50e_76e3_411a_8264_866789260d3a_externalid": {
+            "value": null
+        }
+    }
+}

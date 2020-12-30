@@ -1,0 +1,1167 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "labaccount_name": {
+            "defaultValue": "cfa-labaccount",
+            "type": "String"
+        },
+        "lab_name": {
+            "type": "string"
+        },
+        "student_num": {
+            "type": "int"
+        },
+        "image_name": {
+            "type": "string"
+        },
+        "labs_ml_lab_bae2f50e_76e3_411a_8264_866789260d3a_externalid": {
+            "defaultValue": "/subscriptions/6b7c4e2b-4be2-499c-86f1-eb574caaa8a2/resourceGroups/ml-rg-bae2f50e-76e3-411a-8264-866789260d3a/providers/microsoft.devtestlab/labs/ml-lab-bae2f50e-76e3-411a-8264-866789260d3a",
+            "type": "String"
+        }
+    },
+    "variables": {
+        "lab_name_complete": "[concat(parameters('labaccount_name'), '/', parameters('lab_name'))]",
+        "lab_resource": "[resourceId('microsoft.labservices/labaccounts/labs', parameters('labaccount_name'), parameters('lab_name'))]",
+        "lab_image": "[resourceId('microsoft.labservices/labaccounts/galleryimages', parameters('labaccount_name'), parameters('image_name'))]"
+    },
+    "resources": [
+        {
+            "type": "microsoft.labservices/labaccounts",
+            "apiVersion": "2018-10-15",
+            "name": "[parameters('labaccount_name')]",
+            "location": "eastus2",
+            "properties": {
+                "enabledRegionSelection": false
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server 2016 datacenter')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server 2016 datacenter - server core')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server 2019 datacenter')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server 2019 datacenter server core')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server 2019 datacenter server core with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server 2019 datacenter with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server, version 1809 with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server, version 1903 with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server, version 1909 with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server, version 2004 with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/[smalldisk] windows server, version 20h2 with containers')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/couchdb certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/data science virtual machine - ubuntu 18_04')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": true,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/data science virtual machine - windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": true,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/data science virtual machine for linux (centos)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/elasticsearch certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/ghost certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/github enterprise server')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/hadoop certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false
+                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/hashicorp consul certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/hortonworks sandbox with hdp 2_6_4')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/jenkins certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/kafka certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/kubernetes sandbox certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/lamp certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/mariadb certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/mean certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false
+                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/mediawiki certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/microsoft azure site recovery process server v2')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/mongodb certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false
+                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/moodle certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false
+                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/mysql certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/node_js certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/postgresql certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/rabbitmq certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/redis certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sharepoint server 2016 trial')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sharepoint server 2019 trial')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sonarqube certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql 2017 rs and sql 2017 enterprise on ws 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql 2017 rs and sql 2017 standard on ws 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql 2017 rs enterprise on ws 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql 2017 rs standard on ws 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2016 reporting services enterprise on windows server 2016')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2016 reporting services standard on windows server 2016')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise on red hat enterprise linux 7_4 (rhel)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise on red hat enterprise linux ha 8_0')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise on suse linux enterprise server (sles) 12 sp2')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise on ubuntu server 16_04 lts')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise windows server 2016')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise windows server 2016 database engine only')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 enterprise windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on red hat enterprise linux 7_4 (rhel)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on red hat linux ha 8_0')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on suse linux enterprise server (sles) 12 sp2')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on ubuntu server 16_04 lts')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on windows server 2016')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on windows server 2016 database engine only')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2017 standard on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on red hat enterprise linux 7_4')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on red hat enterprise linux ha 8_0')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on suse linux enterprise server (sles) 12 sp5')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on ubuntu server 16_04')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on ubuntu server 18_04')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 enterprise on windows server 2019 database engine only')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 reporting services and sql server 2019 enterprise on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 reporting services and sql server 2019 standard on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 reporting services enterprise on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 reporting services standard on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on red hat enterprise linux 7_4')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on red hat enterprise linux ha 8_0')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on suse linux enterprise server (sles) 12 sp5')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on ubuntu server 16_04')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on ubuntu server 18_04')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on windows server 2019')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": true,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/sql server 2019 standard on windows server 2019 database engine only')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/tensorflow serving certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/visual studio 2019 community (latest release) on windows 10 enterprise n (x64)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": true,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/visual studio 2019 community (latest release) on windows server 2019 (x64)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/visual studio 2019 enterprise (latest release) on windows 10 enterprise n (x64)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/visual studio 2019 enterprise (latest release) on windows server 2019 (x64)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/visual studio 2019 enterprise on windows 10 enterprise n (x64)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/visual studio 2019 enterprise on windows server 2019 (x64)')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/wordpress certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/wordpress multisite certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/galleryimages",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/wordpress with nginx and ssl certified by bitnami')]",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "isEnabled": false,
+                "isOverride": false,
+                "isPlanAuthorized": false                
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/labs",
+            "apiVersion": "2018-10-15",
+            "name": "[variables('lab_name_complete')]",
+            "location": "eastus2",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "maxUsersInLab": "[parameters('student_num')]",
+                "usageQuota": "PT10H",
+                "userAccessMode": "Restricted"
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/labs/environmentsettings",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/cyberrange/default')]",
+            "location": "southcentralus",
+            "dependsOn": [
+                "[variables('lab_resource')]",
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]",
+                "[variables('lab_image')]"
+            ],
+            "properties": {
+                "configurationState": "NotApplicable",
+                "description": "This will be the template for all Student VMs.",
+                "title": "CyberRangeVMTemplate",
+                "resourceSettings": {
+                    "galleryImageResourceId": "[variables('lab_image')]",
+                    "size": "Basic",
+                    "referenceVm": {
+                        "userName": "labuser"
+                    }
+                }
+            }
+        },
+        {
+            "type": "microsoft.labservices/labaccounts/labs/environmentsettings/environments",
+            "apiVersion": "2018-10-15",
+            "name": "[concat(parameters('labaccount_name'), '/cyberrange/default/ml-envvm-148841131')]",
+            "location": "southcentralus",
+            "dependsOn": [
+                "[resourceId('microsoft.labservices/labaccounts/labs/environmentsettings', parameters('labaccount_name'), 'cyberrange', 'default')]",
+                "[variables('lab_resource')]",
+                "[resourceId('microsoft.labservices/labaccounts', parameters('labaccount_name'))]"
+            ],
+            "properties": {
+                "resourceSets": {
+                    "vmResourceId": "[concat(parameters('labs_ml_lab_bae2f50e_76e3_411a_8264_866789260d3a_externalid'), '/virtualmachines/ml-envvm-00')]",
+                    "resourceSettingId": "1"
+                }
+            }
+        }
+    ]
+}
