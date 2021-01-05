@@ -11,6 +11,8 @@
         "labGitHubToken": { "type": "string" },
         "shared-vnet": { "type": "string" },
         "shared-vnet-subnet": { "type": "string" },
+        "vmAutoStartTime": { "type": "string" },
+        "vmAutoStartDays": { "type": "array" },
         "vmShutdownTime": { "type": "string" },
         "vmShutdownTimeZoneId": { "type": "string" },
         "maxAllowedVmsPerUser": { "type": "int" },
@@ -129,12 +131,25 @@
                     "properties": {
                         "status": "Enabled",
                         "taskType": "LabVmsShutdownTask",
-                        /*"weeklyRecurrence": {
-                            "weekdays": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ],
-                            "time": "22:00"
-                        },*/
                         "dailyRecurrence": { "time": "[parameters('vmShutdownTime')]" },
-                        "timeZoneId": "[parameters('vmShutdownTimeZoneId')]"
+                        "timeZoneId": "[parameters('vmShutdownTimeZoneId') ]"
+                    }
+                },
+                {
+                    "name": "LabVmAutoStart",
+                    "type": "schedules",
+                    "apiVersion": "2018-09-15",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [ "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]" ],
+                    "tags": {},
+                    "properties": {
+                        "status": "Enabled",
+                        "taskType": "LabVmsStartupTask",
+                        "weeklyRecurrence": {
+                            "weekdays": "[parameters('vmAutoStartDays')]",
+                            "time": "[parameters('vmAutoStartTime')]"
+                        },
+                        "timeZoneId": "[parameters('vmShutdownTimeZoneId') ]"
                     }
                 },
                 {

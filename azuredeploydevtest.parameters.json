@@ -20,6 +20,18 @@
         "shared-vnet-subnet": {
             "value": "db-subnet"
         },
+        "vmAutoStartTime": {
+            "value": "08:00"
+        },
+        "vmAutoStartDays": {
+            "value": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+            ]
+        },
         "vmShutdownTime": {
             "value": "22:00" 
         },
