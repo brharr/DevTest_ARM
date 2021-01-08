@@ -14,10 +14,10 @@
         "labGitHubToken": {
             "value": "835bb25d79eff187e7a08f48e0631c2b29a166a6"
         },
-        "shared-vnet": {
+        "vnet": {
             "value": "vnet-devtest-shated"
         },
-        "shared-vnet-subnet": {
+        "vnetSubnet": {
             "value": "db-subnet"
         },
         "vmAutoStartTime": {

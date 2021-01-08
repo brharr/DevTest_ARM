@@ -9,8 +9,8 @@
             "metadata": { "description": "This required value needs to be a full Repo Cloning URL, i.e.: https://github.com/Azure/azure-quickstart-templates.git"}
         },
         "labGitHubToken": { "type": "string" },
-        "shared-vnet": { "type": "string" },
-        "shared-vnet-subnet": { "type": "string" },
+        "vnet": { "type": "string" },
+        "vnetSubnet": { "type": "string" },
         "vmAutoStartTime": { "type": "string" },
         "vmAutoStartDays": { "type": "array" },
         "vmShutdownTime": { "type": "string" },
@@ -27,7 +27,7 @@
         }
     },
     "variables": {
-        "sharedSubnetId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('shared-vnet')), '/subnets/', parameters('shared-vnet-subnet'))]",
+        "sharedSubnetId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('vnet')), '/subnets/', parameters('vnetSubnet'))]",
         "allowedImages": "\"{\\\"offer\\\":\\\"CentOS\\\",\\\"publisher\\\":\\\"OpenLogic\\\",\\\"sku\\\":\\\"7.2\\\",\\\"osType\\\":\\\"Linux\\\",\\\"version\\\":\\\"latest\\\"}\",\"{\\\"offer\\\":\\\"Oracle-Linux\\\",\\\"publisher\\\":\\\"Oracle\\\",\\\"sku\\\":\\\"7.2\\\",\\\"osType\\\":\\\"Linux\\\",\\\"version\\\":\\\"latest\\\"}\",\"{\\\"offer\\\":\\\"SQL2016-WS2012R2\\\",\\\"publisher\\\":\\\"MicrosoftSQLServer\\\",\\\"sku\\\":\\\"Enterprise\\\",\\\"osType\\\":\\\"Windows\\\",\\\"version\\\":\\\"latest\\\"}\""
     },
     "resources": [
@@ -57,7 +57,7 @@
             "resources": 
             [
                 {
-                    "name": "[parameters('shared-vnet')]",
+                    "name": "[parameters('vnet')]",
                     "type": "virtualnetworks",
                     "apiVersion": "2018-09-15",
                     "location": "[resourceGroup().location]",
@@ -72,7 +72,7 @@
                             }
                         ],
                         "description": "Virtual network created to provide shared resources for all developers, such as DBs",
-                        "externalProviderResourceId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('shared-vnet'))]"
+                        "externalProviderResourceId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet'))]"
                         /*"subnetOverrides": [
                             {
                                 "resourceId": "[variables('sharedSubnetId')]",
