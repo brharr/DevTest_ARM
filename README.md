@@ -4,9 +4,9 @@ This repo is a set of Azure ARM Templates and corresponding Parameters files tha
 
 ## Deployment
 
-To leverage these templates, clone the repo into either you local folder or into your Azure Cloud Shell Storage Account and then run either the following Azure CLI or Azure PowerShell commands:
+To leverage these templates, clone the repo into either you local folder or into your Azure Cloud Shell Storage Account and then run either of the following Azure CLI or Azure PowerShell commands:
 
-Azure CLI: az deployment group create --resource-group <group-name> --name <lab-name> --template-file azuredeploydevtest.json --parameters @azuredeploydevtest.parameters.json
+Azure CLI: az deployment group create --resource-group <group-name> --template-file azuredeploydevtest.json --parameters @azuredeploydevtest.parameters.json
 
 Other examples can be found at the following location: [Deploy-CLI](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-cli)
 
